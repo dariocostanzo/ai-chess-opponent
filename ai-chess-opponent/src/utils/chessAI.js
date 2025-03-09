@@ -1,6 +1,6 @@
 // src/utils/chessAI.js
 
-import Chess from 'chess.js';
+import { Chess } from 'chess.js';
 import aiSettings from '../config/aiSettings';
 
 // Piece values for material evaluation
@@ -20,12 +20,12 @@ const PIECE_VALUES = {
  */
 const evaluatePosition = (game) => {
   // If checkmate, return extreme value
-  if (game.in_checkmate()) {
+  if (game.isCheckmate()) {
     return game.turn() === 'w' ? -10000000 : 10000000;
   }
   
   // If draw, return 0
-  if (game.in_draw() || game.in_stalemate() || game.in_threefold_repetition()) {
+  if (game.isDraw() || game.isStalemate() || game.isThreefoldRepetition()) {
     return 0;
   }
 
@@ -61,12 +61,16 @@ const evaluatePosition = (game) => {
     
     // Clone the game to see opponent's mobility
     const tempGame = new Chess(game.fen());
-    tempGame.move('e3'); // Make a dummy move to switch turns
-    const opponentMobility = tempGame.moves().length;
-    
-    const mobilityScore = (whiteToMove ? currentMobility - opponentMobility : opponentMobility - currentMobility) * 
+    // Make a dummy move to switch turns if possible
+    const possibleMoves = tempGame.moves();
+    if (possibleMoves.length > 0) {
+      tempGame.move(possibleMoves[0]);
+      const opponentMobility = tempGame.moves().length;
+      
+      const mobilityScore = (whiteToMove ? currentMobility - opponentMobility : opponentMobility - currentMobility) * 
                          aiSettings.evaluationWeights.mobility;
-    score += mobilityScore;
+      score += mobilityScore;
+    }
   }
   
   // Center control evaluation
@@ -95,7 +99,7 @@ const evaluatePosition = (game) => {
  */
 const minimax = (game, depth, alpha, beta, isMaximizingPlayer) => {
   // Base case: if depth reached or game over
-  if (depth === 0 || game.game_over()) {
+  if (depth === 0 || game.isGameOver()) {
     return evaluatePosition(game);
   }
 
@@ -206,4 +210,6 @@ export const getBestMove = (game, difficulty = aiSettings.defaultDifficulty) => 
   return findBestMove(game, depth);
 };
 
-export default { getBestMove };
+const chessAI = { getBestMove };
+
+export default chessAI;

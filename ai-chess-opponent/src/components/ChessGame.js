@@ -24,17 +24,17 @@ function ChessGame() {
     setMoveHistory(history);
     
     // If game is over, alert the result
-    if (game.game_over()) {
+    if (game.isGameOver()) {
       let result = "";
-      if (game.in_checkmate()) {
+      if (game.isCheckmate()) {
         result = game.turn() === 'w' ? "Black wins by checkmate!" : "White wins by checkmate!";
-      } else if (game.in_draw()) {
+      } else if (game.isDraw()) {
         result = "Game ended in draw.";
-      } else if (game.in_stalemate()) {
+      } else if (game.isStalemate()) {
         result = "Game ended in stalemate.";
-      } else if (game.in_threefold_repetition()) {
+      } else if (game.isThreefoldRepetition()) {
         result = "Game ended by threefold repetition.";
-      } else if (game.insufficient_material()) {
+      } else if (game.isInsufficientMaterial()) {
         result = "Game ended due to insufficient material.";
       }
       
@@ -46,7 +46,7 @@ function ChessGame() {
 
   // Make AI move
   const makeAIMove = () => {
-    if (game.game_over() || isThinking) return;
+    if (game.isGameOver() || isThinking) return;
     
     setIsThinking(true);
     
@@ -157,7 +157,7 @@ function ChessGame() {
       
       <div className="game-info">
         <div className="status">
-          {game.game_over() 
+          {game.isGameOver() 
             ? "Game over" 
             : isThinking 
               ? "AI is thinking..." 
