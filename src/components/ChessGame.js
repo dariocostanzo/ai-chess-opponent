@@ -94,12 +94,12 @@ function ChessGame() {
   };
 
   // Undo last move (both player and AI)
-  const undoMove = () => {
-    // Undo twice to rollback both AI and player moves
-    game.undo();
-    game.undo();
-    setGame(new Chess(game.fen()));
-  };
+  // const undoMove = () => {
+  //   // Undo twice to rollback both AI and player moves
+  //   game.undo();
+  //   game.undo();
+  //   setGame(new Chess(game.fen()));
+  // };
 
   // Flip the board
   const flipBoard = () => {
@@ -115,7 +115,7 @@ function ChessGame() {
     <div className="chess-game">
       <div className="game-controls">
         <button onClick={resetGame}>New Game</button>
-        <button onClick={undoMove}>Undo Move</button>
+        {/* <button onClick={undoMove}>Undo Move</button> */}
         <button onClick={flipBoard}>Flip Board</button>
         <div className="difficulty-selector">
           <label htmlFor="difficulty">AI Level: </label>
