@@ -1,0 +1,100 @@
+/* src/styles/ChessGame.css */
+
+.chess-game {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.game-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.game-controls button {
+  padding: 8px 16px;
+  background-color: #3a75c4;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.game-controls button:hover {
+  background-color: #2a5594;
+}
+
+.difficulty-selector {
+  display: flex;
+  align-items: center;
+}
+
+.difficulty-selector label {
+  margin-right: 8px;
+}
+
+.difficulty-selector select {
+  padding: 6px 12px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+.board-container {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.game-info {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.status {
+  font-size: 18px;
+  font-weight: bold;
+  padding: 10px;
+  background-color: #f5f5f5;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.move-history {
+  padding: 15px;
+  background-color: #f5f5f5;
+  border-radius: 4px;
+}
+
+.move-history h3 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.moves {
+  font-family: 'Courier New', monospace;
+  line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+  .game-controls {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .game-controls button {
+    width: 100%;
+  }
+  
+  .difficulty-selector {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
